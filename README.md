@@ -1,6 +1,6 @@
 # LiteMesh 项目主页
 
-本仓库用于维护 LiteMesh 项目的学术主页，展示研究摘要、方法介绍及实验结果。
+本仓库包含 LiteMesh 项目主页的源代码，用于展示研究摘要、方法介绍及实验结果。
 
 **LiteMesh: An Efficient Quality-Aware Algorithm for Feature-Preserving Triangle Mesh Simplification**
 
