@@ -54,7 +54,7 @@ p { text-align: justify; }
 .citation-section h2 { font-size: 26px; margin-bottom: 22px; letter-spacing: -.3px; }
 .abstract-section p { line-height: 1.8; text-align: left; }
 .abstract-section p + p { margin-top: 20px; }
-.abstract-section strong { font-weight: 600; }
+.abstract-section strong { font-weight: 700; background-color: #e6edf3; padding: .04em .16em; border-radius: 3px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .content-section { padding-top: 50px; }
 .content-section > p { margin-left: auto; margin-right: auto; }
 .video-figure { margin: 28px 0; }
