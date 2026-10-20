@@ -36,7 +36,8 @@ h1 { max-width: 1180px; margin: 0 auto 26px; font-family: inherit; font-size: 44
 .resource-button:hover { background: #202020; border-color: #202020; color: #fff; text-decoration: none; }
 .resource-button:disabled { opacity: .65; cursor: default; }
 .resource-button:disabled:hover { background: var(--ink); border-color: var(--ink); }
-.resource-button svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.resource-button svg { flex: 0 0 auto; width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.resource-button .resource-icon-github { fill: currentColor; stroke: none; }
 .wide-content, .content-width, .text-content { width: min(1360px, calc(100% - 64px)); margin-left: auto; margin-right: auto; }
 .teaser { margin-bottom: 44px; }
 .image-frame { position: relative; display: block; padding: 0; width: 100%; border: 0; background: transparent; border-radius: 6px; transition: transform .25s ease, box-shadow .25s ease; }
