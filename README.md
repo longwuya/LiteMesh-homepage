@@ -1,50 +1,52 @@
-# LiteMesh 项目主页
+[English](README.md) | [简体中文](README.zh-CN.md)
 
-本仓库包含 LiteMesh 项目主页的源代码，用于展示研究摘要、方法介绍及实验结果。
+# LiteMesh Project Homepage
+
+This repository contains the source code for the LiteMesh project homepage, presenting the research abstract, method overview, and experimental results.
 
 **LiteMesh: An Efficient Quality-Aware Algorithm for Feature-Preserving Triangle Mesh Simplification**
 
-## 项目地址
+## Project Links
 
-- 项目主页：https://longwuya.github.io/LiteMesh-homepage/
-- 算法代码：https://github.com/longwuya/LiteMesh
-- 主页源代码：https://github.com/longwuya/LiteMesh-homepage
+- Project homepage: https://longwuya.github.io/LiteMesh-homepage/
+- Algorithm code: https://github.com/longwuya/LiteMesh
+- Homepage source code: https://github.com/longwuya/LiteMesh-homepage
 
-## 页面内容
+## Page Contents
 
-- Abstract：研究摘要。
-- Introduction：方法介绍与演示视频。
-- Results：实验结果与方法对比。
-- Citation：论文引用信息。
+- Abstract: Research abstract.
+- Introduction: Method overview and demonstration video.
+- Results: Experimental results and comparisons with other methods.
+- Citation: Paper citation information.
 
-## 本地预览
+## Local Preview
 
-在仓库目录运行：
+Run the following command from the repository directory:
 
 ```sh
 python -m http.server 8010 --bind 127.0.0.1
 ```
 
-本地访问地址：http://127.0.0.1:8010/
+Local preview URL: http://127.0.0.1:8010/
 
-## 部署与维护
+## Deployment and Maintenance
 
-网站使用静态 HTML、CSS 和 JavaScript 构建，通过 GitHub Pages 发布，无需运行 LiteMesh 算法或配置后端服务。
+The website uses static HTML, CSS, and JavaScript and is hosted on GitHub Pages. It does not require running the LiteMesh algorithm or configuring a backend service.
 
-- 发布分支：`main`。
-- 发布目录：仓库根目录。
-- 更新方式：提交并推送页面修改后，由 GitHub Pages 自动部署。
+- Publishing branch: `main`.
+- Publishing directory: Repository root.
+- Updates: GitHub Pages deploys automatically after page changes are committed and pushed.
 
-页面作者信息、所属机构、研究文字和实验图注应与项目论文资料保持一致。图片及演示视频位于仓库内，可随页面一同部署。
+Keep author information, affiliations, research text, and experimental figure captions consistent with the project paper materials. Figures and demonstration videos are stored in the repository and deployed with the website.
 
-## 目录说明
+## Repository Structure
 
 ```text
-index.html   页面内容
-style.css    页面样式
-page.js      导航与交互
-images/      实验图片
-icon/        机构校标
-fonts/       本地字体及许可证
-video.mp4    方法演示视频
+index.html   Page content
+style.css    Page styles
+page.js      Navigation and interactions
+images/      Experimental figures
+icon/        Institution logos
+fonts/       Local fonts and licenses
+video.mp4    Method demonstration video
 ```
