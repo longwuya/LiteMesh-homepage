@@ -1,18 +1,4 @@
-// Animate once as each figure enters the viewport. Content remains visible if
-// observers are unavailable or animations are disabled.
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-if ('IntersectionObserver' in window && !reducedMotion.matches) {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('figure-entering');
-      entry.target.addEventListener('animationend', () =>
-        entry.target.classList.remove('figure-entering'), { once: true });
-      observer.unobserve(entry.target);
-    });
-  }, { threshold: .06, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.teaser, .research-figure').forEach(figure => observer.observe(figure));
-}
 
 // Sticky section navigation keeps normal anchor links and browser history.
 const navigation = document.querySelector('.site-nav');
@@ -50,13 +36,15 @@ function updateNavigation() {
     index = sectionLinks.length - 1;
   }
   activateSection(sectionLinks[index]);
-  navigation.classList.toggle('is-stuck', navigation.getBoundingClientRect().top <= .5 && window.scrollY > 0);
+  const stickyTop = parseFloat(getComputedStyle(navigation).top) || 0;
+  navigation.classList.toggle('is-stuck', navigation.getBoundingClientRect().top <= stickyTop + .5 && window.scrollY > 0);
 }
 function queueNavigationUpdate() {
   if (navigationFrame === null) navigationFrame = requestAnimationFrame(updateNavigation);
 }
 function resizeNavigation() {
-  document.documentElement.style.setProperty('--nav-height', `${navigation.offsetHeight}px`);
+  const stickyTop = parseFloat(getComputedStyle(navigation).top) || 0;
+  document.documentElement.style.setProperty('--nav-height', `${navigation.offsetHeight + stickyTop}px`);
   queueNavigationUpdate();
 }
 window.addEventListener('scroll', queueNavigationUpdate, { passive: true });
@@ -65,3 +53,38 @@ window.addEventListener('hashchange', queueNavigationUpdate);
 window.addEventListener('load', queueNavigationUpdate);
 if ('ResizeObserver' in window) new ResizeObserver(resizeNavigation).observe(navigation);
 resizeNavigation();
+
+// Keep the shared background aligned to the teaser after fonts, images, or
+// viewport changes. offsetTop is unaffected by the figure's entrance animation.
+const teaser = document.querySelector('.teaser');
+function resizeIntroBackground() {
+  if (!teaser) return;
+  const bottomSpace = parseFloat(getComputedStyle(teaser).marginBottom) || 0;
+  document.body.style.setProperty('--intro-background-height', `${Math.ceil(teaser.offsetTop + teaser.offsetHeight + bottomSpace)}px`);
+}
+window.addEventListener('resize', resizeIntroBackground);
+window.addEventListener('load', resizeIntroBackground);
+if ('ResizeObserver' in window) {
+  const introObserver = new ResizeObserver(resizeIntroBackground);
+  introObserver.observe(document.querySelector('.hero'));
+  introObserver.observe(teaser);
+  introObserver.observe(navigation);
+}
+if (document.fonts) document.fonts.ready.then(resizeIntroBackground);
+resizeIntroBackground();
+
+// Decode the method clip only while it is near the viewport.
+const methodClip = document.querySelector('video[autoplay]');
+if (methodClip && 'IntersectionObserver' in window) {
+  let methodClipVisible = false;
+  function updateMethodClip() {
+    if (methodClipVisible && !document.hidden) methodClip.play().catch(() => {});
+    else methodClip.pause();
+  }
+  methodClip.pause();
+  new IntersectionObserver(entries => {
+    methodClipVisible = entries[0].isIntersecting;
+    updateMethodClip();
+  }, { rootMargin: '120px 0px', threshold: .01 }).observe(methodClip);
+  document.addEventListener('visibilitychange', updateMethodClip);
+}
